@@ -7,11 +7,11 @@ const buildHTML = () => {
     .toString();
   const images = fs.readdirSync(path.resolve(__dirname, './public/images'));
   const mappedImages = images.map(
-    (filename) => `<img src="${path.resolve(__dirname, `/images/${filename}`)}" style="width:500px" />`,
-  ).join('<br />');
+    (filename) => `<div><img src="${path.resolve(__dirname, `/images/${filename}`)}" style="width:600px" /></div>`,
+  ).join('');
 
   // TODO: clean up folder structure for deployment
-  const output = template.replace('<section id="image-gallery"></section>', `<section id="image-gallery">${mappedImages}</section>`);
+  const output = template.replace('<section class="image-gallery"></section>', `<section class="image-gallery">${mappedImages}</section>`);
 
   fs.writeFileSync(path.resolve(__dirname, './public/index.html'), output);
 };
