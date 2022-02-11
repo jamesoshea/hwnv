@@ -23,10 +23,10 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         const processed = yield smartcrop_sharp_1.default.crop(`./test-images/${filename}`, { width: 800, height: 800 });
         const crop = processed.topCrop;
         return (0, sharp_1.default)(`./test-images/${filename}`)
+            .rotate()
             .extract({
             width: crop.width, height: crop.height, left: crop.x, top: crop.y,
         })
-            .rotate()
             .linear(contrast, -(128 * contrast) + 128)
             .modulate({ brightness })
             .toFile(`./output/${filename}`);
