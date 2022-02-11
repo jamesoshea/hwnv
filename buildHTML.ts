@@ -10,11 +10,9 @@ const buildHTML = () => {
     (filename) => `<img src="${path.resolve(__dirname, `/images/${filename}`)}" style="width:500px" />`,
   ).join('<br />');
 
-  // TODO: add img tags for each image, clean up folder structure for deployment
-
+  // TODO: clean up folder structure for deployment
   const output = template.replace('<section id="image-gallery"></section>', `<section id="image-gallery">${mappedImages}</section>`);
 
   fs.writeFileSync(path.resolve(__dirname, './public/index.html'), output);
-  console.log('done');
 };
 export default buildHTML;

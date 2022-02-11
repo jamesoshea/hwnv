@@ -7,11 +7,19 @@ const PORT = 8000;
 
 app.use(express.static('public'));
 
-processImages().then(() => {
-  buildHTML();
-});
-
 app.get('/', (_req, res) => res.sendFile('index.html'));
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
-});
+
+const main = async () => {
+  console.log('⚡️[server]: processing images');
+  await processImages();
+
+  console.log('⚡️[server]: building static content');
+  buildHTML();
+
+  console.log('⚡️[server]: starting server');
+  app.listen(PORT, () => {
+    console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
+  });
+};
+
+main();
