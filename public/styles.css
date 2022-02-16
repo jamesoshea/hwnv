@@ -1,60 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@400;700&family=Robotod&display=swap');
 
 body {
   margin: 0;
-  background-color: #DDDDDD;
+  background-color: #9dcbba;
+  overscroll-behavior: none;
 }
 
 main {
-  color: #333333;
-  background-color: #FFFFFF;
-  padding: 1rem 2rem;
+  color: #343330;
+  padding: 0 2rem;
   max-width: 896px;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
 h1 {
-  font-family: 'Merriweather', serif;
+  color: #f7cb15;
+  font-family: 'Zilla Slab Highlight';
 }
 
 h3 {
-  font-family: 'Merriweather', serif;
+  font-family: 'Zilla Slab Highlight';
 }
 
 h4 {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 p {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+img {
+  border-radius: 4px;
 }
 
 .container {
+  padding: 1rem 0;
   display: flex;
+  flex-flow: row wrap;
   gap: 2rem;
   box-sizing: border-box;
+  height: 100vh;
 }
 
 .sidebar {
   position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  background-color: white;
   max-width: 264px;
+}
+
+.sidebar > h1 {
+  margin-top: 0;
 }
 
 .sidebar > p {
   text-align: justify;
 }
 
-.content {
-  background-color: white;
-  margin-top: 1rem;
-}
-
-.image-gallery{
+.image-gallery {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  justify-content: space-between;
+}
+
+a{
+  color: #f7cb15;
+}
+
+@media screen and (max-width: 768px) {
+
+  main{
+    padding: 0 1rem;
+  }
+
+  .container{
+    gap: 0;
+  }
+
+  img {
+    width: calc(100vw - 2rem)
+  }
 }

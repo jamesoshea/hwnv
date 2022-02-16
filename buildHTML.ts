@@ -7,7 +7,7 @@ const buildHTML = () => {
     .toString();
   const images = fs.readdirSync(path.resolve(__dirname, './public/images'));
   const mappedImages = images.map(
-    (filename) => `<div><img src="${path.resolve(__dirname, `/images/${filename}`)}" style="width:600px" /></div>`,
+    (filename) => `<div><img src="${path.resolve(__dirname, `/images/${filename}`)}" /></div>`,
   ).join('');
 
   // TODO: clean up folder structure for deployment
