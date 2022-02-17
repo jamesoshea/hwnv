@@ -5,11 +5,7 @@ import processImages from './processImages';
 const app = express();
 const PORT = 8000;
 
-app.use(express.static('public'));
-
-app.get('/', (_req, res) => res.sendFile('index.html'));
-app.get('/people', (_req, res) => res.sendFile('people.html'));
-app.get('/not-people', (_req, res) => res.sendFile('not-people.html'));
+app.use(express.static('public', { extensions: ['htm', 'html'] }));
 
 const main = async () => {
   console.log('⚡️[server]: processing images');

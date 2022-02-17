@@ -1,18 +1,24 @@
 import fs from 'fs';
 import path from 'path';
 
-const buildHTML = () => {
+const buildPage = (directory) => {
   const template = fs
-    .readFileSync(path.resolve(__dirname, './public/template.html'))
+    .readFileSync(path.resolve(__dirname, './template.html'))
     .toString();
-  const images = fs.readdirSync(path.resolve(__dirname, './public/images'));
+
+  const images = fs.readdirSync(path.resolve(__dirname, `./public/images/${directory}`));
   const mappedImages = images.map(
-    (filename) => `<div><img src="${path.resolve(__dirname, `/images/${filename}`)}" /></div>`,
+    (imageName) => `<div><img src="${path.resolve(__dirname, `/images/${directory}/${imageName}`)}" /></div>`,
   ).join('');
 
-  // TODO: clean up folder structure for deployment
   const output = template.replace('<section class="image-gallery"></section>', `<section class="image-gallery">${mappedImages}</section>`);
 
-  fs.writeFileSync(path.resolve(__dirname, './public/index.html'), output);
+  fs.writeFileSync(path.resolve(__dirname, `./public/${directory}.html`), output);
 };
+
+const buildHTML = () => {
+  buildPage('people');
+  buildPage('not-people');
+};
+
 export default buildHTML;
