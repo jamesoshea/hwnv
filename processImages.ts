@@ -25,12 +25,16 @@ const processDirectory = (directory) => {
         }
 
         try {
-          fs.mkdirSync(`./public/images/${directory}`);
+          fs.mkdirSync('./public/images');
         } catch (e) {
         // directory already exists
         }
 
-        console.log(`./test-images/${directory}/${filename}`);
+        try {
+          fs.mkdirSync(`./public/images/${directory}`);
+        } catch (e) {
+        // directory already exists
+        }
 
         smartcrop
           .crop(`./test-images/${directory}/${filename}`, {

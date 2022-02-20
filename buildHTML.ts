@@ -1,12 +1,18 @@
-import fs from 'fs';
+import fs, { readdirSync } from 'fs';
 import path from 'path';
 
-const buildPage = (directory) => {
-  const template = fs
-    .readFileSync(path.resolve(__dirname, './template.html'))
-    .toString();
+const directories = readdirSync('test-images');
+const template = fs
+  .readFileSync(path.resolve(__dirname, './src/template.html'))
+  .toString();
 
-  const images = fs.readdirSync(path.resolve(__dirname, `./public/images/${directory}`));
+const copyStaticContent = () => {
+  fs.copyFileSync('./src/template.html', './public/index.html');
+  fs.copyFileSync('./src/styles.css', './public/styles.css');
+};
+
+const buildPage = (directory) => {
+  const images = fs.readdirSync(path.resolve(__dirname, `./test-images/${directory}`));
   const mappedImages = images.map(
     (imageName) => `<div><img src="${path.resolve(__dirname, `/images/${directory}/${imageName}`)}" /></div>`,
   ).join('');
@@ -17,8 +23,10 @@ const buildPage = (directory) => {
 };
 
 const buildHTML = () => {
-  buildPage('people');
-  buildPage('not-people');
+  copyStaticContent();
+  for (let i = 0; i < directories.length; i += 1) {
+    buildPage(directories[i]);
+  }
 };
 
 export default buildHTML;
