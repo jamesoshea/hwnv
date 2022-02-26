@@ -1,6 +1,7 @@
 import sharp from 'sharp';
 import smartcrop from 'smartcrop-sharp';
 import fs from 'fs';
+import path from 'path';
 
 const contrast = 1.1;
 const brightness = 1.1;
@@ -16,34 +17,35 @@ function checkFileExistsSync(filepath) {
 }
 
 const processDirectory = (directory) => {
-  const imageFileNames = fs.readdirSync(`./test-images/${directory}`);
+  // console.log(path.resolve(__dirname, `../test-images/${directory}`));
+  const imageFileNames = fs.readdirSync(path.resolve(__dirname, `../test-images/${directory}`));
   return Promise.all(
     imageFileNames.map(
       async (filename) => {
-        if (checkFileExistsSync(`./public/images/${directory}/${filename}`)) {
+        if (checkFileExistsSync(path.resolve(__dirname, `../public/images/${directory}/${filename}`))) {
           return;
         }
 
         try {
-          fs.mkdirSync('./public/images');
+          fs.mkdirSync(path.resolve(__dirname, '../public/images'));
         } catch (e) {
         // directory already exists
         }
 
         try {
-          fs.mkdirSync(`./public/images/${directory}`);
+          fs.mkdirSync(path.resolve(__dirname, `../public/images/${directory}`));
         } catch (e) {
         // directory already exists
         }
 
         smartcrop
-          .crop(`./test-images/${directory}/${filename}`, {
+          .crop(path.resolve(__dirname, `../test-images/${directory}/${filename}`), {
             width: 800,
             height: 800,
           })
           .then((processed) => {
             const crop = processed.topCrop;
-            sharp(`./test-images/${directory}/${filename}`)
+            sharp(path.resolve(__dirname, `../test-images/${directory}/${filename}`))
               .extract({
                 width: crop.width,
                 height: crop.height,
@@ -53,7 +55,7 @@ const processDirectory = (directory) => {
               .rotate()
               .linear(contrast, -(128 * contrast) + 128)
               .modulate({ brightness })
-              .toFile(`./public/images/${directory}/${filename}`);
+              .toFile(path.resolve(__dirname, `../public/images/${directory}/${filename}`));
           });
       },
     ),

@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@400;700&family=Robotod&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@400;700&family=Robotod&display=swap");
 body {
   margin: 0;
   background-color: #9dcbba;
@@ -15,20 +14,20 @@ main {
 }
 
 h1 {
-  color: #f7cb15;
-  font-family: 'Zilla Slab Highlight';
+  color: #524632;
+  font-family: "Zilla Slab Highlight";
 }
 
 h3 {
-  font-family: 'Zilla Slab Highlight';
+  font-family: "Zilla Slab Highlight";
 }
 
 h4 {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 p {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 img {
@@ -65,21 +64,20 @@ img {
   justify-content: space-between;
 }
 
-a{
-  color: #f7cb15;
+a {
+  color: #524632;
 }
 
 @media screen and (max-width: 768px) {
-
-  main{
+  main {
     padding: 0 1rem;
   }
 
-  .container{
+  .container {
     gap: 0;
   }
 
   img {
-    width: calc(100vw - 2rem)
+    width: calc(100vw - 2rem);
   }
 }
